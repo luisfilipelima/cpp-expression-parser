@@ -1,2 +1,3 @@
 test-shunting-yard
 *.o
+*.exe

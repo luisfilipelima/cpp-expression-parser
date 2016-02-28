@@ -40,8 +40,11 @@ int main(int argc, char** argv) {
   map<string, double> vars;
   vars["pi"] = 3.14;
   vars["b1"] = 0;
+  vars["p"]  = 10;
 
   cout << "\nTests with static calculate::calculate()\n" << endl;
+
+  assert( "p*0.3+20", 23.0, &vars );
 
   assert("-pi+1", -2.14, &vars);
   assert("-pi+1 + b1", -2.14, &vars);
@@ -68,6 +71,8 @@ int main(int argc, char** argv) {
   vars["b2"] = .86;
   assert(c3.eval(&vars), 4);
 
+  calculator c4( "(p+2)*4", &vars );
+
   cout << "\nTesting exception management\n" << endl;
 
   try {
@@ -93,6 +98,8 @@ int main(int argc, char** argv) {
   }
 
   cout << "\nEnd testing" << endl;
+
+  cout << "\nC4 VALUE: " << c4.eval() << endl;
 
   return 0;
 }
