@@ -12,11 +12,13 @@
 
 using namespace std;
 
-struct TokenBase {
+struct TokenBase
+{
   virtual ~TokenBase() {}
 };
 
-template<class T> class Token : public TokenBase {
+template<class T> class Token : public TokenBase
+{
 public:
   Token (T t) : val(t) {}
   T val;
@@ -24,7 +26,8 @@ public:
 
 typedef std::queue<TokenBase*> TokenQueue_t;
 
-class calculator {
+class calculator
+{
 private:
   static map<string, int> opPrecedence;
   static map<string, int> buildOpPrecedence();
@@ -36,7 +39,7 @@ public:
 private:
   static double calculate( TokenQueue_t RPN,
       map<string, double>* vars = 0 );
-  static void cleanRPN(TokenQueue_t& rpn);
+  static void cleanRPN( TokenQueue_t& rpn );
   static TokenQueue_t toRPN( const char* expr,
       map<string, double>* vars,
       map<string, int> opPrecedence=opPrecedence );
@@ -45,14 +48,12 @@ private:
   TokenQueue_t RPN;
 public:
   ~calculator();
-  calculator(){}
-  calculator(const char* expr,
-      map<string, double>* vars = 0,
+  calculator() {}
+  calculator( const char* expr, map<string, double>* vars = 0,
+      map<string, int> opPrecedence=opPrecedence );
+  void compile( const char* expr, map<string, double>* vars = 0,
       map<string, int> opPrecedence=opPrecedence);
-  void compile(const char* expr,
-      map<string, double>* vars = 0,
-      map<string, int> opPrecedence=opPrecedence);
-  double eval(map<string, double>* vars = 0);
+  double eval( map<string, double>* vars = 0);
   string str();
 };
 
