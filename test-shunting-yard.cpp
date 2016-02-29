@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
   vars["pi"] = 3.14;
   vars["b1"] = 0;
   vars["p"]  = 10;
+  vars["e"] = 2.718281828;
 
   cout << "\nTests with static calculate::calculate()\n" << endl;
 
@@ -72,6 +73,9 @@ int main(int argc, char** argv) {
   assert(c3.eval(&vars), 4);
 
   calculator c4( "(p+2)*4", &vars );
+  calculator c5( "e*pi", &vars );
+  calculator c6( "(pi-e)*p", &vars );
+  calculator c7;
 
   cout << "\nTesting exception management\n" << endl;
 
@@ -99,7 +103,12 @@ int main(int argc, char** argv) {
 
   cout << "\nEnd testing" << endl;
 
+  c7.compile( "(pi-e)*p", &vars );
+
   cout << "\nC4 VALUE: " << c4.eval() << endl;
+  cout << "\nC5 VALUE: " << c5.eval() << endl;
+  cout << "\nC6 VALUE: " << c6.eval() << endl;
+  cout << "\nC7 VALUE: " << c7.eval() << endl;
 
   return 0;
 }
